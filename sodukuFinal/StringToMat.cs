@@ -8,11 +8,17 @@ namespace sodukuFinal
 {
     class StringToMat
     {
-        public int[,] Create_mat(string str)
+        public Board Create_mat(string str)
         {
             int len = str.Length;
             int side_len = (int)Math.Sqrt(len);
             Board game_mat = new Board(side_len);
+            int[] number_line = new int[side_len];
+            int[] add_number_to_board = new int[1];
+            for(int i = 1; i <= side_len; i++)
+            {
+                number_line[i - 1] = i;
+            }
             char current_c;
             for (int i = 0; i < side_len; i++)
             {
@@ -24,7 +30,19 @@ namespace sodukuFinal
                         Console.WriteLine("The character" + current_c + "is unavailable, please insert different string");
                         return null;
                     }
-                    Board[i, j] = (int)current_c - 48; //48 = ascci '0'
+                    Cell newCell = new Cell();
+                    if ((int)current_c == 48)
+                    {
+                        newCell.add_possible_nums(number_line);
+                    }
+                    else
+                    {
+                        add_number_to_board[0] = (int)current_c - 48;
+                        newCell.add_possible_nums(add_number_to_board);
+                        game_mat.GetWhatCellSolvedMat().SetCellSolved(i, j);
+                    }
+                    game_mat.setCell(newCell, i, j);
+                    
                 }
             }
             return game_mat;

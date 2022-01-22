@@ -10,11 +10,11 @@ namespace sodukuFinal
     {
         private List<int> possible_nums;
 
-        public Cell(int line_size)
+        public Cell()
         {
-            List<int> possinle_nums = new List<int>();
+            List<int> possible_nums = new List<int>();
         }
-        public int get_size()
+        public int get_amount_possible()
         {
             return possible_nums.Count;
         }
@@ -22,15 +22,9 @@ namespace sodukuFinal
         {
             return possible_nums;
         }
-        public void remove_possible_nums(int[] nums)
+        public void remove_possible_nums(int number)
         {
-            foreach(int number in nums)
-            {
-                if (possible_nums.Contains(number))
-                {
-                    possible_nums.Remove(number);
-                }
-            }
+            possible_nums.Remove(number);
         }
         public void add_possible_nums(int[] nums)
         {
