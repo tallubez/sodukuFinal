@@ -12,7 +12,7 @@ namespace sodukuFinal
         {
             int len = str.Length;
             int side_len = (int)Math.Sqrt(len);
-            int[,] game_mat = new int[side_len, side_len];
+            Board game_mat = new Board(side_len);
             char current_c;
             for (int i = 0; i < side_len; i++)
             {
@@ -24,7 +24,7 @@ namespace sodukuFinal
                         Console.WriteLine("The character" + current_c + "is unavailable, please insert different string");
                         return null;
                     }
-                    game_mat[i, j] = (int)current_c - 48; //48 = ascci '0'
+                    Board[i, j] = (int)current_c - 48; //48 = ascci '0'
                 }
             }
             return game_mat;
