@@ -22,6 +22,14 @@ namespace sodukuFinal
         {
             return possible_nums;
         }
+        public void SetPossibleNums(List<int> possible)
+        {
+            this.possible_nums.Clear();
+            for(int i=0; i< possible.Count; i++)
+            {
+                possible_nums.Add(possible[i]);
+            }
+        }
         public void remove_possible_nums(int number)
         {
             possible_nums.Remove(number);

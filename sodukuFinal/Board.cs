@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sodukuFinal
 {
-    class Board
+    class Board: ICloneable
     {
         private int side_size;
         private Cell[,] cells;
@@ -26,6 +26,10 @@ namespace sodukuFinal
         {
             return cells;
         }
+        public void SetCells(Cell[,] cells)
+        {
+            this.cells = cells.Clone() as Cell[,];
+        }
         public void setCell(Cell c, int place_x, int place_y)
         {
             cells[place_x, place_y] = c;
@@ -37,6 +41,10 @@ namespace sodukuFinal
         public WhatCellSolvedMat GetWhatCellSolvedMat()
         {
             return what_cell_is_solved_mat;
+        }
+        public void SetWhatCellSolvedMat(WhatCellSolvedMat mat)
+        {
+            what_cell_is_solved_mat = mat.Clone() as WhatCellSolvedMat;
         }
         public int[] GetSquareStarters(int place_x, int place_y) //returns the place where the square containing the cell beggins
         {
@@ -58,6 +66,7 @@ namespace sodukuFinal
         {
             List<int[]> all_effected_places = new List<int[]>();
             int[] place = new int[2];
+            bool does_exist_flag;
             for (int i = 0; i < side_size; i++)
             {
                 place[0] = place_x;
@@ -83,13 +92,31 @@ namespace sodukuFinal
                 {
                     if (square_start_x + i != place_x || square_start_y + j != place_y)
                     {
-                        place[0] = i;
-                        place[1] = j;
-                        all_effected_places.Add(place.Clone() as int[]);
+
+                        place[0] = square_start_x + i;
+                        place[1] = square_start_y + j;
+                        does_exist_flag = false;
+                        for(int k =0; k < all_effected_places.Count; k++)
+                        {
+                            if(place[0] == all_effected_places[k][0] && place[1] == all_effected_places[k][1])
+                            {
+                                does_exist_flag = true;
+                            }
+                        }
+                        if (!does_exist_flag)
+                        { all_effected_places.Add(place.Clone() as int[]); }
                     }
                 }
             }
             return all_effected_places;
+        }
+
+        public Object Clone()
+        {
+            Board new_board = new Board(side_size);
+            new_board.SetCells(cells);
+            new_board.SetWhatCellSolvedMat(what_cell_is_solved_mat);
+            return new_board;
         }
     }
 }
