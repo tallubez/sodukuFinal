@@ -13,8 +13,12 @@ namespace sodukuFinal
 
         public WhatCellSolvedMat(int side_size)
         {
-            bool[,] is_solved_mat = new bool[side_size, side_size];
+            is_solved_mat = new bool[side_size, side_size];
             amount_solved = 0;
+        }
+        public int GetAmountSolved()
+        {
+            return amount_solved;
         }
         public void SetCellSolved(int place_x, int place_y)
         {

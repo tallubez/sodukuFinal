@@ -10,19 +10,22 @@ namespace sodukuFinal
     {
         static void Main(string[] args)
         {
-            
-            List<int[]> all_effected_places = new List<int[]>();
-            int[] place = { 1, 2 };
-            all_effected_places.Add(place.Clone() as int[]);
-            place[0] = 8;
-            all_effected_places.Add(place);
-            Console.WriteLine(all_effected_places[0][0]);
-            Console.WriteLine(all_effected_places[0][1]);
-            Console.WriteLine(all_effected_places[1][0]);
-            Console.WriteLine(all_effected_places[1][1]);
-            Console.WriteLine(place[0]);
+            int side_size = 9;
+            string s = "1234123412341234";
+            StringToMat string_to_mat_service = new StringToMat();
+            Board b = string_to_mat_service.Create_mat(s);
+            BoardPrintert bp = new BoardPrintert();
+            bp.PrintBoard(b);
 
-
+        }
+        public void save()
+        {
+            int side_size = 9;
+            string s = "1234123412341234";
+            StringToMat string_to_mat_service = new StringToMat();
+            Board b = string_to_mat_service.Create_mat(s);
+            BoardPrintert bp = new BoardPrintert();
+            bp.PrintBoard(b);
         }
     }
 }

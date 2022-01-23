@@ -14,8 +14,8 @@ namespace sodukuFinal
         public Board(int side_size)
         {
             this.side_size = side_size;
-            Cell[,] cells = new Cell[side_size, side_size];
-            WhatCellSolvedMat what_cell_is_solved_mat = new WhatCellSolvedMat(side_size);
+            cells = new Cell[side_size, side_size];
+            what_cell_is_solved_mat = new WhatCellSolvedMat(side_size);
         }
 
         public int getSize()

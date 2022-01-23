@@ -12,7 +12,7 @@ namespace sodukuFinal
 
         public Cell()
         {
-            List<int> possible_nums = new List<int>();
+            possible_nums = new List<int>();
         }
         public int get_amount_possible()
         {
