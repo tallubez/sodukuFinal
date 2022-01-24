@@ -30,6 +30,11 @@ namespace sodukuFinal
                 possible_nums.Add(possible[i]);
             }
         }
+        public void SetToSpecificNum(int number)
+        {
+            possible_nums.Clear();
+            possible_nums.Add(number);
+        }
         public void remove_possible_nums(int number)
         {
             possible_nums.Remove(number);

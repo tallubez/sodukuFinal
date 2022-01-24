@@ -14,7 +14,6 @@ namespace sodukuFinal
             int side_len = (int)Math.Sqrt(len);
             Board game_mat = new Board(side_len);
             int[] number_line = new int[side_len];
-            int[] add_number_to_board = new int[1];
             for(int i = 1; i <= side_len; i++)
             {
                 number_line[i - 1] = i;
@@ -31,14 +30,13 @@ namespace sodukuFinal
                         return null;
                     }
                     Cell newCell = new Cell();
-                    if ((int)current_c == 48)
+                    if (current_c == '0')
                     {
                         newCell.add_possible_nums(number_line);
                     }
                     else
                     {
-                        add_number_to_board[0] = (int)current_c - 48;
-                        newCell.add_possible_nums(add_number_to_board);
+                        newCell.SetToSpecificNum((int)current_c - '0');
                         game_mat.GetWhatCellSolvedMat().SetCellSolved(i, j);
                     }
                     game_mat.setCell(newCell, i, j);

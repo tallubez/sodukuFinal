@@ -110,6 +110,7 @@ namespace sodukuFinal
             }
             return all_effected_places;
         }
+        
 
         public Object Clone()
         {

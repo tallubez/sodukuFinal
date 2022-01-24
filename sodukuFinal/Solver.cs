@@ -14,11 +14,25 @@ namespace sodukuFinal
         public bool NoGuessSolver(Board game_board)
         {
             int side_size = game_board.getSize();
-            for(int i=0; i < side_size; i++)
+            if (!NakedSingles(game_board))
             {
-                for(int j=0; j<side_size; j++)
+                return false;
+            }
+            HiddenSingleFinder hiddenSingleFinder_service = new HiddenSingleFinder();
+            if (!hiddenSingleFinder_service.hidden_single_shell(game_board))
+            { 
+                return false;
+            }
+            return true;
+        }
+        public bool NakedSingles(Board game_board)
+        {
+            int side_size = game_board.getSize();
+            for (int i = 0; i < side_size; i++)
+            {
+                for (int j = 0; j < side_size; j++)
                 {
-                    if(!update_possible_number(game_board, i, j))
+                    if (!update_possible_number(game_board, i, j))
                     {
                         return false;
                     }
@@ -44,13 +58,13 @@ namespace sodukuFinal
             }
             if (game_board.GetCell(place_x, place_y).get_amount_possible() == 1) // if cell is already set
             {
-                if(place_x == side_size - 1)
+                if (place_x == side_size - 1)
                 {
                     return Guess(game_board, 0, place_y + 1);
                 }
                 else
                 {
-                     return Guess(game_board, place_x + 1, place_y);
+                    return Guess(game_board, place_x + 1, place_y);
                 }
             }
             if (game_board.GetCell(place_x, place_y).get_amount_possible() == 0) //if guess failed
@@ -91,9 +105,8 @@ namespace sodukuFinal
                 }
             }
             return false;
-          
-        }
 
+        }
 
         public bool update_possible_number(Board game_board, int place_x, int place_y)
         {
@@ -113,7 +126,7 @@ namespace sodukuFinal
             }
             if (game_board.GetCell(place_x, place_y).get_amount_possible() == 1)
             {
-                if(!number_found(game_board, place_x, place_y))
+                if (!number_found(game_board, place_x, place_y))
                 {
                     return false;
                 }
@@ -124,7 +137,7 @@ namespace sodukuFinal
             }
             return true;
         }
-
+       
         public Boolean number_found(Board game_board, int place_x, int place_y)
         {
             if (!game_board.GetWhatCellSolvedMat().IsCellSolved(place_x, place_y))
@@ -152,7 +165,7 @@ namespace sodukuFinal
                             return false;
                         }
                     }
-                    if (current_amount_possible == 0)
+                    else if (current_amount_possible == 0)
                     {
                         ch(x_current_point, y_current_point, game_board);
                         return false;
@@ -186,6 +199,7 @@ namespace sodukuFinal
             board_printing_service.PrintStartBoard(game_board);
             if (!NoGuessSolver(game_board))
             {
+                board_printing_service.PrintStartBoard(game_board);
                 Console.WriteLine("This board can't be solved");
                 return null;
             }
@@ -196,6 +210,7 @@ namespace sodukuFinal
             is_guess_flag = true;
             if (!Guess(game_board, 0, 0))
             {
+
                 Console.WriteLine("This board can't be solved");
                 return null;
             }
