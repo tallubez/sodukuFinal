@@ -61,7 +61,8 @@ namespace sodukuFinal
             bool can_guess_work_flag;
             if (game_board.GetCell(place_x, place_y).get_amount_possible() != 1)
             {
-                foreach (int number in game_board.GetCell(place_x, place_y).get_possible_nums())
+                List<int> copy_get_possible_nums = new List<int>(game_board.GetCell(place_x, place_y).get_possible_nums());
+                foreach (int number in copy_get_possible_nums)
                 {
                     add_guess_to_cell.Clear();
                     Board guess_game_board = game_board.Clone() as Board;
@@ -96,6 +97,7 @@ namespace sodukuFinal
 
         public bool update_possible_number(Board game_board, int place_x, int place_y)
         {
+            is_guess_flag = false;
             List<int[]> all_effected_places = game_board.GetAllEffectedPlaces(place_x, place_y);
             int number_to_remove;
             int x_current_point, y_current_point;
@@ -136,18 +138,23 @@ namespace sodukuFinal
                 }
                 List<int[]> all_effected_places = game_board.GetAllEffectedPlaces(place_x, place_y);
                 int number_to_remove = game_board.GetCell(place_x, place_y).get_possible_nums()[0];
-                int x_current_point, y_current_point;
+                int x_current_point, y_current_point, current_amount_possible;
                 for (int i = 0; i < all_effected_places.Count; i++)
                 {
                     x_current_point = all_effected_places[i][0];
                     y_current_point = all_effected_places[i][1];
                     game_board.GetCell(x_current_point, y_current_point).remove_possible_nums(number_to_remove);
-                    if (game_board.GetCell(x_current_point, y_current_point).get_amount_possible() == 1)
+                    current_amount_possible = game_board.GetCell(x_current_point, y_current_point).get_amount_possible();
+                    if (current_amount_possible == 1)
                     {
-                        number_found(game_board, x_current_point, y_current_point);
+                        if(!number_found(game_board, x_current_point, y_current_point))
+                        {
+                            return false;
+                        }
                     }
-                    if (game_board.GetCell(x_current_point, y_current_point).get_amount_possible() == 0)
+                    if (current_amount_possible == 0)
                     {
+                        ch(x_current_point, y_current_point, game_board);
                         return false;
 
                     }
@@ -162,6 +169,11 @@ namespace sodukuFinal
             board_printing_service.PrintSolvedBoard(game_board);
             solved_flag = true;
             
+        }
+        public void ch(int x,int y, Board game_board)
+        {
+            int current_amount_possible = game_board.GetCell(x, y).get_amount_possible();
+            game_board.GetAllEffectedPlaces(x, y);
         }
         public String Solve(String s)
         {
@@ -181,6 +193,7 @@ namespace sodukuFinal
             {
                 return "yes";
             }
+            is_guess_flag = true;
             if (!Guess(game_board, 0, 0))
             {
                 Console.WriteLine("This board can't be solved");

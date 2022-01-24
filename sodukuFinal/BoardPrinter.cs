@@ -23,8 +23,14 @@ namespace sodukuFinal
                         Console.Write("|   ");
                     }
                     else
+
                     {
-                        Console.Write("| " + game_board.GetCell(i, j).get_possible_nums()[0] + " ");
+                        Console.Write("|");
+                        if(game_board.GetCell(i, j).get_possible_nums()[0] < 10)
+                        {
+                            Console.Write(" ");
+                        }
+                        Console.Write(game_board.GetCell(i, j).get_possible_nums()[0] + " ");
                     }
                 }
                 Console.Write("|");
@@ -44,7 +50,12 @@ namespace sodukuFinal
                 Console.WriteLine();
                 for (int j = 0; j < side_size; j++)
                 {
-                    Console.Write("| " + game_board.GetCell(i, j).get_possible_nums()[0] + " ");
+                    Console.Write("|");
+                    if (game_board.GetCell(i, j).get_possible_nums()[0] < 10)
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.Write(game_board.GetCell(i, j).get_possible_nums()[0] + " ");
                 }
                 Console.Write("|");
                 Console.WriteLine();
