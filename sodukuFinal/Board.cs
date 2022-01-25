@@ -28,7 +28,13 @@ namespace sodukuFinal
         }
         public void SetCells(Cell[,] cells)
         {
-            this.cells = cells.Clone() as Cell[,];
+            for(int i = 0; i < side_size; i++)
+            {
+                for (int j = 0; j < side_size; j++)
+                {
+                    this.cells[i, j] = cells[i, j].Clone() as Cell;
+                }
+            }
         }
         public void setCell(Cell c, int place_x, int place_y)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sodukuFinal
 {
-    class Cell
+    class Cell: ICloneable
     {
         private List<int> possible_nums;
 
@@ -48,6 +48,13 @@ namespace sodukuFinal
                     possible_nums.Add(number);
                 }
             }
+        }
+        public object Clone()
+        {
+            Cell copy_c = new Cell();
+            List<int> possible = new List<int>(get_possible_nums());
+            copy_c.SetPossibleNums(possible);
+            return copy_c;
         }
     }
 
