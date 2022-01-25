@@ -34,6 +34,7 @@ namespace sodukuFinal
                     place[0] = j;
                     cells_to_search.Add(place.Clone() as int[]);
                 }
+                
                 if (!hidden_single(cells_to_search, game_board))
                 {
                     return false;
@@ -72,14 +73,13 @@ namespace sodukuFinal
             Solver number_found_service = new Solver();
             game_board.GetCell(0, 1).get_possible_nums();
             int side_size = game_board.getSize();
-            List<int> posible_numbers = new List<int>();
             int[] possible_hidden_numbers = new int[side_size + 1];
             for (int i = 0; i < cell_group.Count; i++)
             {
-                posible_numbers = game_board.GetCell(cell_group[i][0], cell_group[i][1]).get_possible_nums();
+                List<int> posible_numbers = new List<int>(game_board.GetCell(cell_group[i][0], cell_group[i][1]).get_possible_nums().ToList());
                 foreach (int number in posible_numbers)
                 {
-                    possible_hidden_numbers[number] = +1;
+                    possible_hidden_numbers[number] += 1;
                 }
             }
             game_board.GetCell(0, 1).get_possible_nums();
@@ -89,7 +89,7 @@ namespace sodukuFinal
                 {
                     foreach (int[] place in cell_group)
                     {
-                        posible_numbers = game_board.GetCell(place[0], place[1]).get_possible_nums();
+                        List<int> posible_numbers = new List<int>(game_board.GetCell(place[0], place[1]).get_possible_nums());
                         if (posible_numbers.Contains(i))
                         {
                             if (posible_numbers.Count != 1)
@@ -103,7 +103,12 @@ namespace sodukuFinal
                         }
                     }
                 }
+                if(possible_hidden_numbers[i] == 0)
+                {
+                    return false;
+                }
             }
             return true;
         }
+    }
 }

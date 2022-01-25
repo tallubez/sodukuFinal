@@ -18,6 +18,8 @@ namespace sodukuFinal
             {
                 return false;
             }
+            BoardPrinter board_printing_service = new BoardPrinter();
+            board_printing_service.PrintStartBoard(game_board);
             HiddenSingleFinder hiddenSingleFinder_service = new HiddenSingleFinder();
             if (!hiddenSingleFinder_service.hidden_single_shell(game_board))
             { 
@@ -187,6 +189,8 @@ namespace sodukuFinal
         {
             int current_amount_possible = game_board.GetCell(x, y).get_amount_possible();
             game_board.GetAllEffectedPlaces(x, y);
+            BoardPrinter board_printing_service = new BoardPrinter();
+            board_printing_service.PrintStartBoard(game_board);
         }
         public String Solve(String s)
         {
