@@ -26,7 +26,7 @@ namespace sodukuFinal
 
         public bool update_possible_number(Board game_board, int place_x, int place_y)
         {
-            is_guess_flag = false;
+            Solver number_found_service = new Solver();
             List<int[]> all_effected_places = game_board.GetAllEffectedPlaces(place_x, place_y);
             int number_to_remove;
             int x_current_point, y_current_point;
@@ -42,7 +42,7 @@ namespace sodukuFinal
             }
             if (game_board.GetCell(place_x, place_y).get_amount_possible() == 1)
             {
-                if (!number_found(game_board, place_x, place_y))
+                if (!number_found_service.number_found(game_board, place_x, place_y))
                 {
                     return false;
                 }

@@ -52,6 +52,11 @@ namespace sodukuFinal
         {
             what_cell_is_solved_mat = mat.Clone() as WhatCellSolvedMat;
         }
+        public string GetBoardAsString()
+        {
+            StringToMat board_to_string_service = new StringToMat();
+            return board_to_string_service.SolveBoardToString(this);
+        }
         public int[] GetSquareStarters(int place_x, int place_y) //returns the place where the square containing the cell beggins
         {
             int square_size = (int)Math.Sqrt(side_size);

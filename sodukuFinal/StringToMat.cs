@@ -45,6 +45,20 @@ namespace sodukuFinal
             }
             return game_mat;
         }
+
+        public String SolveBoardToString(Board game_board)
+        {
+            String outcome = "";
+            int side_size = game_board.getSize();
+            for(int i = 0; i < side_size; i++)
+            {
+                for (int j = 0; j < side_size; j++)
+                {
+                    outcome = outcome + ((char)(game_board.GetCell(i, j).get_possible_nums()[0] + '0')).ToString();
+                }
+            }
+            return outcome;
+        }
     }
 }
 

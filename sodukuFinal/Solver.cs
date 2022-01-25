@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace sodukuFinal
 {
     class Solver
@@ -122,11 +121,11 @@ namespace sodukuFinal
             BoardPrinter board_printing_service = new BoardPrinter();
             board_printing_service.PrintSolvedBoard(game_board);
             solved_flag = true;
-            
+            solved_board = game_board.GetBoardAsString();
         }
         public String Solve(String s)
         {
-
+            solved_board = "";
             is_guess_flag = false;
             solved_flag = false;
             StringToMat stringToMat_service = new StringToMat();
@@ -135,16 +134,13 @@ namespace sodukuFinal
             board_printing_service.PrintStartBoard(game_board);
             if (!NoGuessSolver(game_board))
             {
-                board_printing_service.PrintStartBoard(game_board);
                 Console.WriteLine("This board can't be solved");
                 return null;
             }
             if (solved_flag)
             {
-                return "yes";
+                return solved_board;
             }
-            Console.WriteLine("board before trying to guess:");
-            board_printing_service.PrintStartBoard(game_board);
             is_guess_flag = true;
             if (!Guess(game_board, 0, 0))
             {
@@ -152,7 +148,7 @@ namespace sodukuFinal
                 Console.WriteLine("This board can't be solved");
                 return null;
             }
-            return "?";
+            return solved_board;
 
         }
     }
