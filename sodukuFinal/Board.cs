@@ -121,7 +121,48 @@ namespace sodukuFinal
             }
             return all_effected_places;
         }
-        
+        public List<int[]> GetRow(int place_x)
+        {
+            List<int[]> cell_list = new List<int[]>();
+            int[] place = new int[2];
+            place[0] = place_x;
+            for (int i = 0; i < side_size; i++)
+            {
+                place[1] = i;
+                cell_list.Add(place.Clone() as int[]);
+            }
+            return cell_list;
+        }
+        public List<int[]> GetCol(int place_y)
+        {
+            List<int[]> cell_list = new List<int[]>();
+            int[] place = new int[2];
+            place[1] = place_y;
+            for (int i = 0; i < side_size; i++)
+            {
+                place[0] = i;
+                cell_list.Add(place.Clone() as int[]);
+            }
+            return cell_list;
+        }
+        public List<int[]> GetSquare(int place_x, int place_y)
+        {
+            List<int[]> cell_list = new List<int[]>();
+            int[] place = new int[2];
+            int square_size = (int)Math.Sqrt(side_size);
+            int[] square_starter = GetSquareStarters(place_x, place_y);
+            for (int i = 0; i < square_size; i++)
+            {
+                for (int j = 0; j < square_size; j++)
+                {
+
+                    place[0] = square_starter[0] + i;
+                    place[1] = square_starter[1] + j;
+                    cell_list.Add(place.Clone() as int[]);
+                }
+            }
+            return cell_list;
+        }
 
         public Object Clone()
         {

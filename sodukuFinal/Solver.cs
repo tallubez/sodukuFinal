@@ -7,11 +7,14 @@ namespace sodukuFinal
 {
     class Solver
     {
-        private bool is_guess_flag;
         private bool solved_flag;
         private string solved_board;
         public bool NoGuessSolver(Board game_board)
         {
+            if (solved_flag)
+            {
+                return true;
+            }
             int side_size = game_board.getSize();
             NakedSingleFinder nakedSingleFinder_service = new NakedSingleFinder();
             if (!nakedSingleFinder_service.NakedSingles(game_board))
@@ -21,6 +24,12 @@ namespace sodukuFinal
             HiddenSingleFinder hiddenSingleFinder_service = new HiddenSingleFinder();
             if (!hiddenSingleFinder_service.hidden_single_shell(game_board))
             { 
+                return false;
+            }
+
+            HiddenClusters hiddenClustersFinder_service = new HiddenClusters();
+            if  (!hiddenClustersFinder_service.FindHiddenClusters(game_board))
+            {
                 return false;
             }
             return true;
@@ -40,21 +49,27 @@ namespace sodukuFinal
                 return true;
             }
 
-                if (place_x > side_size)
+            if (place_x > side_size)
             {
                 Console.WriteLine("BIG PROBLEM");
                 return false;
             }
-
-            if (game_board.GetCell(place_x, place_y).get_amount_possible() > 0)
+           
+            if (game_board.GetCell(place_x, place_y).get_amount_possible() > 1)
             {
-                List<int> copy_get_possible_nums = new List<int>(game_board.GetCell(place_x, place_y).get_possible_nums().ToList());
-                foreach (int number in copy_get_possible_nums)
+                List<int> copy_get_possible_nums = new List<int>(EducatedGuess(game_board, game_board.GetCell(place_x, place_y).get_possible_nums().ToList()));
+                for (int i=0; i<copy_get_possible_nums.Count;i++)
                 {
+                    int number = copy_get_possible_nums[i];
                     Board guess_game_board = game_board.Clone() as Board;
                     guess_game_board.GetCell(place_x, place_y).SetToSpecificNum(number);
                     if(number_found(guess_game_board, place_x, place_y))
-                    { 
+                    {
+                        if (solved_flag)
+                        {
+                            return true;
+                        }
+                        if (NoGuessSolver(guess_game_board))
                         if (place_y < side_size-1)
                         {
                             if (Guess(guess_game_board, place_x, place_y+1))
@@ -74,11 +89,86 @@ namespace sodukuFinal
 
                 }
             }
-            return false;
+            if (game_board.GetCell(place_x, place_y).get_amount_possible() == 1)
+            {
+                if (place_y < side_size - 1)
+                {
+                    if (Guess(game_board, place_x, place_y + 1))
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (Guess(game_board, place_x + 1, 0))
+                    {
+                        return true;
+                    }
+
+                }
+
+            }
+                return false;
         }
 
-        
-       
+
+        public List<int> EducatedGuess(Board game_board, List<int> guess_options)
+        {
+            int side_size = game_board.getSize();
+            List<int> guess_order = new List<int>();
+            float[] all_numbers = new float[side_size+1];
+            float amount_missing, amount_places_can_be;
+            foreach (int guess in guess_options)
+            {
+                amount_missing = side_size;
+                amount_places_can_be = 0;
+                for (int i = 0; i < side_size; i++)
+                {
+                    for (int j = 0; j < side_size; j++)
+                    {
+                        if(game_board.GetCell(i,j).get_amount_possible() > 1)
+                        {
+                            foreach( int option in game_board.GetCell(i, j).get_possible_nums())
+                            {
+                                amount_places_can_be++;
+                            }
+                        }
+                        if (game_board.GetCell(i, j).get_amount_possible() == 1)
+                        {
+                            if(game_board.GetCell(i,j).get_possible_nums()[0] == guess)
+                            {
+                                amount_missing--;
+                            }
+                        }
+                    }
+                }
+                if (amount_missing != 0)
+                {
+                    all_numbers[guess] = amount_places_can_be / amount_missing;
+                }
+            }
+            for (int i = 1; i < side_size + 1; i++) 
+            {
+                if (all_numbers[i] > 0)
+                {
+                    int j=0;
+                    while (j < guess_order.Count && all_numbers[i] > guess_order[j]) { j++; }
+                    if (j  - 1 > 0)
+                    {
+                        guess_order.Insert(j - 1, i);
+                    }
+                    else
+                    {
+                        guess_order.Insert(0, i);
+                    }
+                }
+            }
+            if(guess_order.Count != guess_options.Count)
+            {
+                Console.WriteLine("a");
+            }
+            return guess_order;
+        }
         public Boolean number_found(Board game_board, int place_x, int place_y)
         {
             if (!game_board.GetWhatCellSolvedMat().IsCellSolved(place_x, place_y))
@@ -118,20 +208,32 @@ namespace sodukuFinal
 
         public void Solved(Board game_board)
         {
-            BoardPrinter board_printing_service = new BoardPrinter();
-            board_printing_service.PrintSolvedBoard(game_board);
-            solved_flag = true;
-            solved_board = game_board.GetBoardAsString();
+            BoardValidation boardValidation_service = new BoardValidation();
+            if (boardValidation_service.IsBoardCorrect(game_board))
+            {
+                if (!solved_flag)
+                {
+                    BoardPrinter board_printing_service = new BoardPrinter();
+                    board_printing_service.PrintSolvedBoard(game_board);
+                    solved_flag = true;
+                    solved_board = game_board.GetBoardAsString();
+                }
+            }
+            else
+            {
+                Console.WriteLine("big problem");
+            }
         }
         public String Solve(String s)
         {
-            solved_board = "";
-            is_guess_flag = false;
             solved_flag = false;
+            solved_board = "";
             StringToMat stringToMat_service = new StringToMat();
             Board game_board = stringToMat_service.Create_mat(s);
             BoardPrinter board_printing_service = new BoardPrinter();
             board_printing_service.PrintStartBoard(game_board);
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
             if (!NoGuessSolver(game_board))
             {
                 Console.WriteLine("This board can't be solved");
@@ -141,13 +243,15 @@ namespace sodukuFinal
             {
                 return solved_board;
             }
-            is_guess_flag = true;
+
             if (!Guess(game_board, 0, 0))
             {
 
                 Console.WriteLine("This board can't be solved");
                 return null;
             }
+            watch.Stop();
+            Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
             return solved_board;
 
         }

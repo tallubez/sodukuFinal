@@ -11,31 +11,13 @@ namespace sodukuFinal
         public bool hidden_single_shell(Board game_board)
         {
             int side_size = game_board.getSize();
-            List<int[]> cells_to_search = new List<int[]>();
-            int[] place = new int[2];
-            List<int> amount_number_can_apear = new List<int>();
             for (int i = 0; i < side_size; i++)
-            {
-                cells_to_search.Clear();
-                place[0] = i;
-                for (int j = 0; j < side_size; j++)
-                {
-                    place[1] = j;
-                    cells_to_search.Add(place.Clone() as int[]);
-                }
-                if (!hidden_single(cells_to_search, game_board))
+            { 
+                if (!hidden_single(game_board.GetRow(i), game_board))
                 {
                     return false;
                 }
-                cells_to_search.Clear();
-                place[1] = i;
-                for (int j = 0; j < side_size; j++)
-                {
-                    place[0] = j;
-                    cells_to_search.Add(place.Clone() as int[]);
-                }
-                
-                if (!hidden_single(cells_to_search, game_board))
+                if (!hidden_single(game_board.GetCol(i), game_board))
                 {
                     return false;
                 }
@@ -46,23 +28,10 @@ namespace sodukuFinal
             {
                 for (int y = 0; y < side_size; y += square_size)
                 {
-                    cells_to_search.Clear();
-                    for (int i = 0; i < square_size; i++)
-                    {
-
-                        for (int j = 0; j < square_size; j++)
-                        {
-
-                            place[0] = x + i;
-                            place[1] = y + j;
-                            cells_to_search.Add(place.Clone() as int[]);
-                        }
-                    }
-                    if (!hidden_single(cells_to_search, game_board))
+                    if (!hidden_single(game_board.GetSquare(x,y), game_board))
                     {
                         return false;
                     }
-
                 }
             }
             return true;

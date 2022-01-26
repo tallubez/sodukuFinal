@@ -35,9 +35,14 @@ namespace sodukuFinal
             possible_nums.Clear();
             possible_nums.Add(number);
         }
-        public void remove_possible_nums(int number)
+        public bool remove_possible_nums(int number)
         {
-            possible_nums.Remove(number);
+            if (possible_nums.Contains(number))
+            {
+                possible_nums.Remove(number);
+                return true;
+            }
+            return false;
         }
         public void add_possible_nums(int[] nums)
         {
