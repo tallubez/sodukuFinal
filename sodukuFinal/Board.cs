@@ -163,12 +163,41 @@ namespace sodukuFinal
             }
             return cell_list;
         }
+        public int[] GetCellWithMinOption()
+        {
+            int min = side_size;
+            int[] place = new int[2];
+            int amount_possible;
+            int counter = 0;
+            for(int i = 0; i < side_size; i++)
+            {
+                for(int j = 0; j < side_size; j++)
+                {
+                    amount_possible = cells[i, j].get_amount_possible();
+                    if (amount_possible <= min && amount_possible != 1)  
+                    {
+                        place[0] = i;
+                        place[1] = j;
+                        min = amount_possible;
+                    }
+                    if(amount_possible == 1)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            if(counter == side_size * side_size)
+            {
+                return null;
+            }
+            return place;
+        }
 
         public Object Clone()
         {
             Board new_board = new Board(side_size);
             new_board.SetCells(cells);
-            new_board.SetWhatCellSolvedMat(what_cell_is_solved_mat);
+            new_board.SetWhatCellSolvedMat(what_cell_is_solved_mat.Clone() as WhatCellSolvedMat);
             return new_board;
         }
     }

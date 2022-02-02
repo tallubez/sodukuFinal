@@ -40,7 +40,13 @@ namespace sodukuFinal
         {
             WhatCellSolvedMat new_mat = new WhatCellSolvedMat(side_size);
             new_mat.amount_solved = amount_solved;
-            new_mat.is_solved_mat = is_solved_mat.Clone() as bool[,];
+            for(int i = 0; i < side_size; i++)
+            {
+                for(int j = 0; j < side_size; j++)
+                {
+                    new_mat.is_solved_mat[i, j] = is_solved_mat[i, j];
+                }
+            }
             return new_mat;
         }
     }

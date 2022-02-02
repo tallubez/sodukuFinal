@@ -11,17 +11,12 @@ namespace sodukuFinal
 
         public bool FindHiddenClusters(Board game_board)
         {
-            if (!HiddenClusterShell(game_board, 2))
+            for (int i = 0; i < 7; i++)
             {
-                return false;
-            }
-            if (!HiddenClusterShell(game_board, 3))
-            {
-                return false;
-            }
-            if (!HiddenClusterShell(game_board, 4))
-            {
-                return false;
+                if (!HiddenClusterShell(game_board, i))
+                {
+                    return false;
+                }
             }
             return true;
         }
