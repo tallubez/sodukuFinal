@@ -1,0 +1,15 @@
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\sodukuFinal.exe
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\sodukuFinal.deps.json
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\sodukuFinal.runtimeconfig.json
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\sodukuFinal.runtimeconfig.dev.json
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\sodukuFinal.dll
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\ref\sodukuFinal.dll
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\bin\Debug\net5.0-windows7.0\sodukuFinal.pdb
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.AssemblyInfoInputs.cache
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.AssemblyInfo.cs
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.csproj.CoreCompileInputs.cache
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.dll
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\ref\sodukuFinal.dll
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.pdb
+C:\Users\TAL\source\repos\sodukuFinal\sodukuFinal\obj\Debug\net5.0-windows7.0\sodukuFinal.genruntimeconfig.cache
