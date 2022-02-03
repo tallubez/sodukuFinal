@@ -8,13 +8,11 @@ namespace sodukuFinal
 {
     public class UI
     {
-        
+        [STAThread]
         public static void Main(string[] args)
         {
-            int i;
-            UI N = new UI();
-            N.NextBoard();
-
+            UI run_program = new UI();
+            run_program.NextBoard();
         }
         public void NextBoard()
         {
@@ -30,6 +28,7 @@ namespace sodukuFinal
             }
             while (answer != "3");
             Console.WriteLine("Program finished.");
+            Console.ReadKey();
 
         }
         public void HandleChoice(string answer)
@@ -37,6 +36,7 @@ namespace sodukuFinal
             {
                 if (answer == "1")
                 {
+                    Console.WriteLine("Enter board");
                     string new_board = Console.ReadLine();
                     solve(new_board);
                 }

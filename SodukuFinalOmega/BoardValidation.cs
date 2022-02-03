@@ -10,7 +10,8 @@ namespace sodukuFinal
     {
         public bool IsBoardCorrect(String game_board_string)
         {
-            StringToMat turn_to_board_srvice = new();
+            //validate that a board is solved correctly
+            StringToMat turn_to_board_srvice = new StringToMat();
             Board game_board = turn_to_board_srvice.Create_mat(game_board_string);
             int side_size = game_board.getSize();
             for (int i = 0; i < side_size; i++)
@@ -40,6 +41,7 @@ namespace sodukuFinal
         }
         public bool IsCellPatchCorrect(List<int[]> cell_group, Board game_board)
         {
+            //get a cell gruop and validate that it contains all of the number between 1 and the size of the side
             int side_size = game_board.getSize();
             int[] all_number = new int[side_size + 1];
             foreach (int[] place in cell_group)

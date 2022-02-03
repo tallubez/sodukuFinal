@@ -32,7 +32,7 @@ namespace sodukuFinal
                     Cell newCell = new Cell();
                     if (current_c == '0')
                     {
-                        newCell.add_possible_nums(number_line);
+                        newCell.SetPossibleNums(number_line.ToList<int>());
                     }
                     else
                     {

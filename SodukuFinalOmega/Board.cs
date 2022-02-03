@@ -17,17 +17,20 @@ namespace sodukuFinal
             cells = new Cell[side_size, side_size];
             what_cell_is_solved_mat = new WhatCellSolvedMat(side_size);
         }
-
+        
         public int getSize()
         {
+            //return the size of a side of a board
             return side_size;
         }
         public Cell[,] GetCells()
         {
+            // return the matrix of cells
             return cells;
         }
         public void SetCells(Cell[,] cells)
         {
+            // set the matrix of cells
             for(int i = 0; i < side_size; i++)
             {
                 for (int j = 0; j < side_size; j++)
@@ -38,27 +41,33 @@ namespace sodukuFinal
         }
         public void setCell(Cell c, int place_x, int place_y)
         {
+            // set sepcific cell
             cells[place_x, place_y] = c;
         }
         public Cell GetCell(int place_x, int place_y)
         {
+            // get specific cell
             return cells[place_x, place_y];
         }
         public WhatCellSolvedMat GetWhatCellSolvedMat()
         {
+            // get the what cell is solved matrix
             return what_cell_is_solved_mat;
         }
         public void SetWhatCellSolvedMat(WhatCellSolvedMat mat)
         {
+            // set the what cell is solved matrix
             what_cell_is_solved_mat = mat.Clone() as WhatCellSolvedMat;
         }
         public string GetBoardAsString()
         {
+            // return the board as string
             StringToMat board_to_string_service = new StringToMat();
             return board_to_string_service.SolveBoardToString(this);
         }
-        public int[] GetSquareStarters(int place_x, int place_y) //returns the place where the square containing the cell beggins
+        public int[] GetSquareStarters(int place_x, int place_y) 
         {
+            //returns the place where the square containing the cell beggins
             int square_size = (int)Math.Sqrt(side_size);
             int square_start_x = 0;
             int square_start_y = 0;
@@ -75,6 +84,8 @@ namespace sodukuFinal
         }
         public List<int[]> GetAllEffectedPlaces(int place_x, int place_y)
         {
+            // return a list containing all the effected places (place is an int arrays with 2 vals, first is X second is Y)
+            // from a cell (all the places in the same row, col and square)
             List<int[]> all_effected_places = new List<int[]>();
             int[] place = new int[2];
             bool does_exist_flag;
@@ -123,6 +134,8 @@ namespace sodukuFinal
         }
         public List<int[]> GetRow(int place_x)
         {
+            // return a list containing all the places (place is an int arrays with 2 vals, first is X second is Y) from the same row
+
             List<int[]> cell_list = new List<int[]>();
             int[] place = new int[2];
             place[0] = place_x;
@@ -135,6 +148,7 @@ namespace sodukuFinal
         }
         public List<int[]> GetCol(int place_y)
         {
+            // return a list containing all the places (place is an int arrays with 2 vals, first is X second is Y) from the same col
             List<int[]> cell_list = new List<int[]>();
             int[] place = new int[2];
             place[1] = place_y;
@@ -147,6 +161,7 @@ namespace sodukuFinal
         }
         public List<int[]> GetSquare(int place_x, int place_y)
         {
+            // return a list containing all the places (place is an int arrays with 2 vals, first is X second is Y) from the same square
             List<int[]> cell_list = new List<int[]>();
             int[] place = new int[2];
             int square_size = (int)Math.Sqrt(side_size);
@@ -165,6 +180,7 @@ namespace sodukuFinal
         }
         public int[] GetCellWithMinOption()
         {
+            // return the place of the cell with the minimum amount of possible numbers (that isn't solved). if all of the board is solved return null;
             int min = side_size;
             int[] place = new int[2];
             int amount_possible;
@@ -195,6 +211,7 @@ namespace sodukuFinal
 
         public Object Clone()
         {
+            //Clone the board
             Board new_board = new Board(side_size);
             new_board.SetCells(cells);
             new_board.SetWhatCellSolvedMat(what_cell_is_solved_mat.Clone() as WhatCellSolvedMat);

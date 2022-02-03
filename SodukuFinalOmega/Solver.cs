@@ -65,7 +65,7 @@ namespace sodukuFinal
             }
             int place_x = place[0];
             int place_y = place[1];
-            List<int> copy_get_possible_nums = new List<int>(EducatedGuess(game_board, game_board.GetCell(place_x, place_y).get_possible_nums().ToList()));
+            List<int> copy_get_possible_nums = new List<int>(game_board.GetCell(place_x, place_y).get_possible_nums().ToList());
             for (int i = 0; i < copy_get_possible_nums.Count; i++)
             {
 
@@ -101,64 +101,6 @@ namespace sodukuFinal
         }
         
 
-        public List<int> EducatedGuess(Board game_board, List<int> guess_options)
-        {
-            return guess_options;
-            int side_size = game_board.getSize();
-            List<int> guess_order = new List<int>();
-            float[] all_numbers = new float[side_size+1];
-            float amount_missing, amount_places_can_be;
-            foreach (int guess in guess_options)
-            {
-                amount_missing = side_size;
-                amount_places_can_be = 0;
-                for (int i = 0; i < side_size; i++)
-                {
-                    for (int j = 0; j < side_size; j++)
-                    {
-                        if(game_board.GetCell(i,j).get_amount_possible() > 1)
-                        {
-                            foreach( int option in game_board.GetCell(i, j).get_possible_nums())
-                            {
-                                amount_places_can_be++;
-                            }
-                        }
-                        if (game_board.GetCell(i, j).get_amount_possible() == 1)
-                        {
-                            if(game_board.GetCell(i,j).get_possible_nums()[0] == guess)
-                            {
-                                amount_missing--;
-                            }
-                        }
-                    }
-                }
-                if (amount_missing != 0)
-                {
-                    all_numbers[guess] = amount_places_can_be / amount_missing;
-                }
-            }
-            for (int i = 1; i < side_size + 1; i++) 
-            {
-                if (all_numbers[i] > 0)
-                {
-                    int j=0;
-                    while (j < guess_order.Count && all_numbers[i] > guess_order[j]) { j++; }
-                    if (j  - 1 > 0)
-                    {
-                        guess_order.Insert(j - 1, i);
-                    }
-                    else
-                    {
-                        guess_order.Insert(0, i);
-                    }
-                }
-            }
-            if(guess_order.Count != guess_options.Count)
-            {
-                Console.WriteLine("a");
-            }
-            return guess_order;
-        }
         public Boolean number_found(Board game_board, int place_x, int place_y)
         {
             if (!game_board.GetWhatCellSolvedMat().IsCellSolved(place_x, place_y))

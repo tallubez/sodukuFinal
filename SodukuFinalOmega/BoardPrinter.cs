@@ -10,6 +10,7 @@ namespace sodukuFinal
     {
         public void PrintStartBoard(Board game_board)
         {
+            // print the board before solving
             int side_size = game_board.getSize();
             Console.WriteLine("Starting board:");
             for (int i = 0; i < side_size; i++)
@@ -19,7 +20,7 @@ namespace sodukuFinal
                 Console.WriteLine();
                 for (int j = 0; j < side_size; j++)
                 {
-                    if (game_board.GetCell(i, j).get_amount_possible() != 1)
+                    if (game_board.GetCell(i, j).get_amount_possible() != 1 || side_size == 1)
                     {
                         Console.Write("|   ");
                     }
@@ -43,6 +44,7 @@ namespace sodukuFinal
         }
         public void PrintSolvedBoard(Board game_board)
         {
+            //print the board when solvedS
             Console.WriteLine("Solved board:");
             int side_size = game_board.getSize();
             for (int i = 0; i < side_size; i++)

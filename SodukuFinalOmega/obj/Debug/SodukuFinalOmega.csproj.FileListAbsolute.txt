@@ -1,0 +1,7 @@
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\obj\Debug\SodukuFinalOmega.csproj.AssemblyReference.cache
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\obj\Debug\SodukuFinalOmega.csproj.CoreCompileInputs.cache
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\bin\Debug\SodukuFinalOmega.exe.config
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\bin\Debug\SodukuFinalOmega.exe
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\bin\Debug\SodukuFinalOmega.pdb
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\obj\Debug\SodukuFinalOmega.exe
+C:\Users\TAL\source\repos\sodukuFinal\SodukuFinalOmega\obj\Debug\SodukuFinalOmega.pdb
