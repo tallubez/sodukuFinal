@@ -12,20 +12,12 @@ namespace sodukuFinal
         private string solved_board;
         public bool NoGuessSolver(Board game_board)
         {
+            //try to solve the board only with solving methods without guessing numbers. return false if board cant be solved.
             if (solved_flag)
             {
                 return true;
             }
             int side_size = game_board.getSize();
-            NakedSingleFinder nakedSingleFinder_service = new NakedSingleFinder();
-            if (!nakedSingleFinder_service.NakedSingles(game_board))
-            {
-                return false;
-            }
-            if (solved_flag)
-            {
-                return true;
-            }
             HiddenSingleFinder hiddenSingleFinder_service = new HiddenSingleFinder();
             if (!hiddenSingleFinder_service.hidden_single_shell(game_board))
             { 
@@ -40,10 +32,19 @@ namespace sodukuFinal
             {
                 return false;
             }
+            NakedSingleFinder nakedSingleFinder_service = new NakedSingleFinder();
+            if (!nakedSingleFinder_service.NakedSingles(game_board))
+            {
+                return false;
+            }
             Intersection intersection_service = new Intersection();
             if (!intersection_service.IntersectionShell(game_board))
             {
                 return false;
+            }
+            if (solved_flag)
+            {
+                return true;
             }
             return true;
         }
@@ -52,7 +53,14 @@ namespace sodukuFinal
      
         public bool Guess(Board game_board)
         {
-            if (solved_flag || !solved_flag_copy)
+            //try to solve board in this system:
+            //1. get board and find the cell (that isn't solved) with minimum options in possible numbers
+            //2. randomly guess from one of the option and create a clone of the board but at the cell put the guess instead of the possible numbers.
+            //3. try to solved the new board, first with noguesssolver and then with guess.
+            //4. if the clone board is solved than the solved board is an answer to the original board
+            //5. if the clone board can't be solved try different guess.
+            //6. if none of the guesses can be solved than the board can't be solved.
+            if (solved_flag || !solved_flag_copy) // if solved
             {
                 return true;
             }
@@ -70,7 +78,7 @@ namespace sodukuFinal
             {
 
                 int number = copy_get_possible_nums[i];
-                Board guess_game_board = game_board.Clone() as Board;
+                Board guess_game_board = game_board.Clone() as Board; // clone the board
                 guess_game_board.GetCell(place_x, place_y).SetToSpecificNum(number);
    
                 if (number_found(guess_game_board, place_x, place_y))
@@ -103,6 +111,9 @@ namespace sodukuFinal
 
         public Boolean number_found(Board game_board, int place_x, int place_y)
         {
+            // when a number is found remove it from the option of all of the cells in the same row, col and squrae.
+            // calls number found if while removing the number a new cell is solved.
+            //return false if the board can't be solved.
             if (!game_board.GetWhatCellSolvedMat().IsCellSolved(place_x, place_y))
             {
                 game_board.GetWhatCellSolvedMat().SetCellSolved(place_x, place_y);
@@ -140,6 +151,7 @@ namespace sodukuFinal
 
         public void Solved(Board game_board)
         {
+            //when board is solved print it, set the answer to the solved board as string and set the solved flag true.
             BoardValidation boardValidation_service = new BoardValidation();
 
             if (!solved_flag && solved_flag_copy)
@@ -155,6 +167,7 @@ namespace sodukuFinal
         }
         public String Solve(String s)
         {
+            //Get board as string and solve it. return solved board as string if board can be solved and rturn null if it can't.
             ValidateInput validateInput_service = new ValidateInput();
             if (!validateInput_service.validate(s))
             {
@@ -167,8 +180,6 @@ namespace sodukuFinal
             Board game_board = stringToMat_service.Create_mat(s);
             BoardPrinter board_printing_service = new BoardPrinter();
             board_printing_service.PrintStartBoard(game_board);
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
             if (!NoGuessSolver(game_board))
             {
                 Console.WriteLine("This board can't be solved");
@@ -185,8 +196,6 @@ namespace sodukuFinal
                 Console.WriteLine("This board can't be solved");
                 return null;
             }
-            watch.Stop();
-            Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
             return solved_board;
 
         }

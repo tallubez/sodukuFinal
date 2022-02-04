@@ -1,0 +1,17 @@
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\TestSodukuaOmega.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\TestSodukuaOmega.pdb
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\SodukuFinalOmega.exe
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\SodukuFinalOmega.pdb
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\SodukuFinalOmega.exe.config
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\obj\Debug\TestSodukuaOmega.csproj.AssemblyReference.cache
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\obj\Debug\TestSodukuaOmega.csproj.CoreCompileInputs.cache
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\obj\Debug\TestSodukuaOmega.csproj.CopyComplete
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\obj\Debug\TestSodukuaOmega.dll
+C:\Users\TAL\source\repos\sodukuFinal\TestSodukuaOmega\obj\Debug\TestSodukuaOmega.pdb

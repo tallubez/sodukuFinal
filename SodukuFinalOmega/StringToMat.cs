@@ -10,6 +10,7 @@ namespace sodukuFinal
     {
         public Board Create_mat(string str)
         {
+            //get string and return the board the it creates.
             int len = str.Length;
             int side_len = (int)Math.Sqrt(len);
             Board game_mat = new Board(side_len);
@@ -48,6 +49,7 @@ namespace sodukuFinal
 
         public String SolveBoardToString(Board game_board)
         {
+            //get solved board and return it as string.
             String outcome = "";
             int side_size = game_board.getSize();
             for(int i = 0; i < side_size; i++)

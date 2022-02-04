@@ -8,8 +8,11 @@ namespace sodukuFinal
 {
     public class Intersection
     {
+        //Intersection is when a number that is missing in a specific box can only appear in a single row/col in the box.
+        //In that case the number must be on this row/col inside the box so we can remove it from the option of the cells in the same row/col outside the box.
         public bool IntersectionShell(Board game_board)
         {
+            // send all of the group of cell boxes to search intersection in them . return false if the board can't be solved.
             int side_size = game_board.getSize();
             int square_size = (int)Math.Sqrt(side_size);
             for (int x = 0; x < side_size; x += square_size)
@@ -26,6 +29,7 @@ namespace sodukuFinal
         }
         public bool FindIntersections(Board game_board, List<int[]> square)
         {
+            //searches for intersection. if found remove the number from the row/col outside the box. return false if the board can't be solved.
             Solver number_found_service = new Solver();
             int side_size = game_board.getSize();
             int x_option, y_option;

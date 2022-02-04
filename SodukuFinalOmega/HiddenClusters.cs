@@ -8,11 +8,11 @@ namespace sodukuFinal
 {
     public class HiddenClusters
     {
-        //hidden cluster is when a group of cell have the exact same possible number list. that means that all the numbers in the list can only apear in one of
+        //hidden cluster is when a cluster of cell have the exact same possible number list. that means that all the numbers in the list can only apear in one of
         // this "cell cluster". you can remove them from the other lists.
         public bool FindHiddenClusters(Board game_board)
         {
-            // search hidden cluster from size to until half the leangth. return false if the board can't br solved.
+            // search hidden cluster from size to until half the leangth. return false if the board can't be solved.
             for (int i = 0; i < game_board.getSize() / 2; i++) 
             {
                 if (!HiddenClusterShell(game_board, i))
@@ -24,7 +24,7 @@ namespace sodukuFinal
         }
         public bool HiddenClusterShell(Board game_board, int cluster_size)
         {
-            // send all of the groups of cells to search clusters in them (rows, cols, squares). return false if the board can't br solved.
+            // send all of the groups of cells to search clusters in them (rows, cols, squares). return false if the board can't be solved.
             int side_size = game_board.getSize();
             for (int i = 0; i < side_size; i++)
             {

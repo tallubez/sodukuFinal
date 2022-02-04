@@ -8,8 +8,10 @@ namespace sodukuFinal
 {
     public class NakedSingleFinder
     {
+        //naked single is when a cell only has one number option. (when all of the known numbers remove all the options exept one.
         public bool NakedSingles(Board game_board)
         {
+            //for each cell send it to update possible num.
             int side_size = game_board.getSize();
             for (int i = 0; i < side_size; i++)
             {
@@ -26,6 +28,7 @@ namespace sodukuFinal
 
         public bool update_possible_number(Board game_board, int place_x, int place_y)
         {
+            //remove from a cell option all the solved number from the same row, col and box.
             Solver number_found_service = new Solver();
             List<int[]> all_effected_places = game_board.GetAllEffectedPlaces(place_x, place_y);
             int number_to_remove;

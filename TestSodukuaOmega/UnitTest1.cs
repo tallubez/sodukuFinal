@@ -5,7 +5,7 @@ using sodukuFinal;
 
 namespace TestSodukuaOmega
 {
-    [TestClass]
+ 
     public class UnitTest1
     {
         [TestMethod]

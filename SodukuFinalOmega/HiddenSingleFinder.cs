@@ -8,8 +8,10 @@ namespace sodukuFinal
 {
     public class HiddenSingleFinder
     {
+        //hidden single searches for numbers that only have one place to be in a group (only one cell have the number in his possible number list)
         public bool hidden_single_shell(Board game_board)
         {
+            // send all of the groups of cells to search hidden single in them (rows, cols, squares). return false if the board can't be solved.
             int side_size = game_board.getSize();
             for (int i = 0; i < side_size; i++)
             { 
@@ -39,6 +41,7 @@ namespace sodukuFinal
 
         public bool hidden_single(List<int[]> cell_group, Board game_board)
         {
+            //searches for hidden single in a cell gruop. if found than activates number found.  return false if the board can't be solved.
             Solver number_found_service = new Solver();
             int side_size = game_board.getSize();
             int[] possible_hidden_numbers = new int[side_size + 1];
